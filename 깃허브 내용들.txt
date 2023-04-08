@@ -1,7 +1,14 @@
-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
+springboard 내용
 
+토큰 키 : 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
 
-https://github.com/pangsili/springboard.git
+리포지터리 주소 : https://github.com/pangsili/springboard.git
+
+TextFiles 내용
+
+토큰 키 : 
+
+리포지터리 주소 : https://github.com/pangsili/TextFiles.git
 
 1. 깃허브 가입
 
