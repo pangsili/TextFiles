@@ -377,4 +377,23 @@ Getter 도 인스턴스 필드에 접근해서 사용하는 함수입니다. 초
 getInstance() 메서드를 사용한다.
 
 
+★ if의 continue
 
+반복문 내에서만 사용되며, 반복이 진행되는 도중 continue 문을 만나면 반복문의 끝으로 이동하여 
+
+다음 반복문으로 넘어간다.
+
+ex)
+for(int i = 0; i <= 10; i++){
+
+	if(i % 2 == 0){
+	
+		continue;
+	
+	}
+	
+	System.out.println(i);
+	
+}
+
+이 경우 나머지가 0인 경우 아래의 continue가 실행되어 아래 println을 실행하지 않는다.
