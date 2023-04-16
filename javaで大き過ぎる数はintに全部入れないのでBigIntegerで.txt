@@ -1,0 +1,42 @@
+javaで大き過ぎる数はintに全部入れないのでBigIntegerでする
+
+BigIntegerには演算子が使えないのでmethodを使う
+
+Math.abs() 는 () 안의 수의 절댓값을 구해주는 메서드이다.
+
+Math.obs(n, m) 는  n의 m승 의 수를 구해주는 메서드이다.
+
+
+정수를 표현하기 위한 자료형
+
+byte, short, int, long
+
+이렇게 나누는 이유는 바로 메모리 제약 때문이다.
+
+각 자료형은 정수를 표현하지만, 그 정수를 표현 할 수 있는 범위가 존재한다.
+
+btye : 1byte = 8bit
+
+short : 2byte
+
+int : 4byte
+
+long : 16byte
+
+
+system.out.print() : 괄호안의 내용을 단순히 출력 / 줄 안바꿈
+
+system.out.println() : 괄호 안의 내용을 출력 한 후 줄을 강제로 바꿔버림
+
+
+charAt() : String으로 저장된 문자열 중에서 한 글자만 선택해서 char타입으로 변환해주는 녀석이다.
+
+괄호 안에는 index 가 들어간다.
+
+
+String은 ""로 지정해주어야 하지만 char 은 ''로 지정해주어야 한다.
+
+
+nextline(); : 엔터를 치기 전까지의 문장 전테를 입력받는다.
+
+next(); : 공백 전까지의 단어를 읽는다.
