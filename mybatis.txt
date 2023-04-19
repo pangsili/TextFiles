@@ -1,0 +1,150 @@
+1. pom.xml 에서 필요한 라이브러리를 받는다.
+
+        <repositories>
+          <repository>
+            <id>oracle</id>
+            <name>ORACLE JDBC Repository</name>
+            <url>http://www.datanucleus.org/downloads/maven2/</url>
+          </repository>
+        </repositories>
+
+        <!-- spring-jdbc -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>${org.springframework-version}</version>
+        </dependency>
+        
+        <!-- dbcp (커넥션 풀) -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+        
+        
+        <!-- Oracle -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>${org.springframework-version}</version>
+        </dependency>
+        
+        <!-- MyBatis -->
+        <dependency>
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis</artifactId>
+          <version>3.4.5</version>
+        </dependency>
+        <dependency>
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis-spring</artifactId>
+          <version>1.3.2</version>
+        </dependency>
+        
+        <!-- 트랜잭션 처리 -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>${org.springframework-version}</version>
+        </dependency>        
+
+
+        <!-- oracle driver -->
+        <dependency>
+          <groupId>oracle</groupId>
+          <artifactId>ojdbc6</artifactId>
+          <version>11.2.0.3</version>
+        </dependency>
+
+
+2. mybatis-config.xml을 만든다
+
+\src\main\resources에 mybatis-config.xml
+
+
+3. root-context.xml에 필요한 설정값을 넣는다.
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+        <property name="username" value="oracle" />
+        <property name="password" value="oracle"/>
+    </bean> 
+
+    <!-- 마이바티스 연동 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource" />
+         <property name="configLocation" value="classpath:/mybatis-config.xml" />
+         <property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+4. dao에 어노테이션을 걸고, sqlSession을 주입한다.
+
+
+@Repository
+
+	@Autowired
+	private SqlSession sqlSession;
+
+적절한 DTO 이름 알아서 해서 만들고, BoardDAO interface로, BoardDAOImpl 만듬
+
+public interface BoardDao {
+
+	public List<BoardDomain> select();
+}
+
+
+@Repository
+public class BoardDaoImpl implements BoardDao {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	private static final String NAMESPACE = "com.stylesystem.sangpil.mappers.boardMapper";
+	
+	@Override
+	public List<BoardDomain> select() {
+		
+		return sqlSession.selectList(NAMESPACE + ".selectAll");
+	}
+
+}
+
+
+5. mapper.xml을 작성하여, sql을 넣는다.
+
+resources -- mappers -- boardMapper.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stylesystem.sangpil.mappers.boardMapper">
+	<select id="selectAll" resultType="com.stylesystem.sangpil.BoardDomain">
+		select * from test
+	</select>
+</mapper>
+
+
+
+6. mainpage에서 확인
+
+@RequestMapping(value = "/mainPage")
+	public ModelAndView mainPage() {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		SqlSession sqlSession;
+		
+		List<BoardDomain> boardList = sqlSession.selectList();
+		
+		mv.addObject("boardList", 'boardList)
+		mv.setViewName("mainPage");
+		
+		return mv;
+	}
+
