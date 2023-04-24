@@ -1,0 +1,48 @@
+ID말고 CLASS 속성으로 하는게 더 좋을 것 같다 // 확장성의 차이
+
+class = "info_check nessary_check"
+
+class = "info_check nessary_check"
+
+class = "info_check choice_check"
+
+class = "info_check choice_check"
+
+내가 한거처럼 하면 변수가 많아지면 많아질수록 점점 헷갈리게된다
+
+
+class = "check_label" onclick
+
+노드구조에서 부모 형제 할아버지 .. HTML  
+
+한 뭉텅이를 컴포넌트라고 부른다.
+<div>
+	<input></input>
+	<label></label>
+	<textarea></textarea>
+</div>
+
+리액트 ,, 페이스북 ,, 반복
+
+
+일단은 다 만들고 시간이 남으면 id들을 class로 바꾸는 연습을 해보자
+이걸 리팩토링이라고 한다.
+
+리팩토링 과정에서 완성본을 백업을 뜨고, 연습을 해보자\
+
+
+이대로를 유지하자.... 이대로면은 잘할 수 있다고하신다.
+
+
+
+
+폼체크 페이지
+
+전체적으로 길이체크를 해야 한다.
+
+
+ajax 힌트
+
+@responsebody 를 찾아보자 이걸 붙은녀석으로
+
+
