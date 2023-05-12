@@ -1,5 +1,11 @@
 PowerShell 문법 공부
 
+# CSOM
+
+SharePoint 에서 클라이언트 개체 모델을 나타내며
+
+SharePoint 에서 데이터를 삽입, 변경, 삭제 및 검색하는데에 사용됩니다.
+
 # Start-Transcript
 
 텍스트 파일에 대한 PowerShell 세션 전체 또는 일부의 레코드를 만듭니다.
