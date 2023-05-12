@@ -1,6 +1,6 @@
 PowerShell 문법 공부
 
-# CSOM
+# CSOM ( Client-Side Object Model )
 
 SharePoint 에서 클라이언트 개체 모델을 나타내며
 
