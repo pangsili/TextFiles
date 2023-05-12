@@ -1,5 +1,10 @@
 PowerShell 문법 공부
 
+# Start-Transcript
+
+텍스트 파일에 대한 PowerShell 세션 전체 또는 일부의 레코드를 만듭니다.
+
+
 # Mailbox
 
 메모리 상에 위치한 메시지를 메시지의 우선 등의 순으로 송싱 및 수신하기 위한 동기/통신 객체이다.
