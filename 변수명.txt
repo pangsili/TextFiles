@@ -1,0 +1,43 @@
+Class Cal
+Method carNumer
+CAR_NUMBER = '1234'
+
+자바스크립트, 파이썬
+
+자바스크립트, private
+
+public
+
+var (variable)			o	o		o
+let (lettable)			x	o		x
+const (construct)		x	x		x
+
+
+if (a % 2 == 0) {
+
+	if (a % 4 == 0) {
+	
+		const result = "この数字は 4の倍数です。";
+		result = 1;
+	}
+	else {
+	
+		const result = "この数字は 4の倍数ではありません。";
+		result = 1;
+	}
+	
+
+}
+
+프론트 앤드 내에서 논리구조를 짤 수 있는 언어가 자바스크립트 (타입스크립트, 파이스크립트)
+그러다 보니까, 별에별 백앤드 유저들이 다 한번씩은 터치합니다.
+
+const CAR_NUMBER = '1234'
+let _car_number = 1234
+var car_number = 1234
+
+const CAR_NUMBERS = [1234,2345,3456];
+for (int i = 0; i < max_size; i++) {
+
+	let _car_number = CAR_NUMBERS[i];
+}
