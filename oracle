@@ -3,7 +3,7 @@
 -- alter table product_bk add (
 --
 --  pdate date
--- )..
+-- )....
 
 -- alter table product_bk drop column pdate
 
