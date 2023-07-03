@@ -1,0 +1,60 @@
+mybatis 문법
+
+※ ibatis iterate문 (mybatis 에서의 foreach 문과 같음)지원 태그
+
+	property : 파라미터명
+
+	prepend : 쿼리로 쓰일 문자
+
+	open : 구문이 시작될때 삽입할 문자열
+
+	close : 구문이 종료될때 삽입할 문자열
+
+	conjunction : 반복되는 사이에 출력할 문자열
+
+
+※ ibatis : MyBatis의 옛 버전
+
+※ MyBatis foreach문 지원 태그
+
+	collection : 전달받은 인자. List or Array 형태만 가능
+
+	item : 전달받은 인자 값을 alias 명으로 대체
+
+	open : 구문이 시작될때 삽입할 문자열
+
+	close : 구문이 종료될때 삽입할 문자열
+
+	separator : 반복 되는 사이에 출력할 문자열
+
+	index : 반복되는 구문 번호이다. 0부터 순차적으로 증가
+	
+※ 사용 예시
+
+	<select id="selectPostIn" resultType="domain.blog.Post">
+	
+		SELECT
+			*
+		FROM
+			POST P
+		WHERE 
+			ID in	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+						
+						#{item}
+					</foreach>
+	</select>
+	
+※ mybatis 에서의 like 문 사용방법
+
+	mybatis 조건절에 content LIKE '%#{search}%' 처럼 입력하면 오류가 발생한다.
+	
+	mybatis 에서는 like 문에 파라미터를 사용하기 위해서는 문자열 합치기 함수(CONCAT {CONCATENATION})를 반드시 사용하여야 한다.
+	
+	# MySQL/MariaDB
+	content like CONCAT('%',#{search},'%')
+
+	# Oracle
+	content like '%' ||  #{search} || '%'
+
+	# MSSQL
+	content like '%' + #{search} + '%'
