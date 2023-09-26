@@ -1,0 +1,56 @@
+BufferedReader : Scanner와 유사.
+
+Bufferedwriter : System.out.println();과 유사
+
+
+둘은 모두 기존에 쓰던 scanner와 System.out.println()보다 속도 측면에서 훨씬 빠르기 때문에
+
+(입력된 데이터가 바로 전달되지 않고 버퍼를 거쳐 전달되므로 데이터 처리 효율성을 높임)
+
+많은 양의 데이터를 처리할 때 유리하다. 
+
+하지만 그에 비해 BufferdReader은 Enter만 경계로 인식하고 받은 데이터가 String으로 고정되기 때문에 입력받은 데이터를 가공하는 작업이 필요한 경우가 많다. 
+
+BufferedReader로 받은 데이터는 String으로 고정되기 때문에 가공하는 작업이 필요하다.
+
+BufferedWriter로 작성할 데이터는 String이어야 하기 때문에, 가공하는 작업이 필요하다.
+
+BufferedWriter로 작성할 때, write(), flush(), close()작업이 모두 필요하다.
+
+Buffered 작업을 할 때는 예외처리가 필요하다.
+
+
+
+예시)
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	try {
+		
+		String number = br.readLine();
+		int su = Integer.parseInt(number);
+		
+		for(int i = 0; i < su; i++) {
+			
+			String susu = br.readLine();
+			String[] name = susu.split(" ");
+			
+			int a1 = Integer.parseInt(name[0]);
+			int a2 = Integer.parseInt(name[1]);
+			
+			Integer result = a1 + a2;
+			
+			bw.write(result.toString() + "\n");
+			bw.flush();
+		}
+		
+		bw.close();
+	}
+	catch(Exception e) {
+		
+		e.printStackTrace();
+	}
+	finally {
+		
+		
+	}
