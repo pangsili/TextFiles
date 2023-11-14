@@ -1,0 +1,264 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		
+		String[][] inputArrays = new String[3][3];
+		
+		for(int i = 0; i < 3; i++) {
+			
+			String input = br.readLine();
+			
+			for(int j = 0; j < 3; j++) {
+				
+				inputArrays[i][j] = input.split(" ")[j];
+			}
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			
+			String str = inputArrays[i][0] + " " + inputArrays[i][1] + " " + inputArrays[i][2];
+			
+			System.out.println(str);
+		}
+		
+		int[] start = {0, 0};
+		int[] end = {2, 2};
+		
+		int ex = end[0];
+		int ey = end[1];
+		boolean result = false;
+		
+		boolean[][] visited = new boolean[3][3];
+		
+		// bfs : 앞으로 내가 체크해야 할 좌표가 들어감
+		Queue<int[]> queue = new LinkedList<int[]>();
+		
+		queue.add(start);
+		
+		while(! queue.isEmpty()) {
+			
+			// 현재좌표 가져옴
+			int[] point = queue.poll();
+			
+			int x = point[0];
+			int y = point[1];
+			
+			if(x == ex && y == ey) {
+				
+				result = true;
+				break;
+			}
+			
+			if(visited[x][y]) {
+				
+				continue;
+			}
+			
+			// 주변좌표
+			// 확인하기전에, 주변 좌표가 맵 밖인지 체크(아웃바운스 방지)
+			boolean checkResult = false;
+			
+			// 위
+			int[] topPoint = {x - 1, y};
+			checkResult = checkPoint(topPoint);
+			if(checkResult) {
+				
+				int nx = topPoint[0];
+				int ny = topPoint[1];
+				
+				String mapPoint = inputArrays[nx][ny];
+				if("0".equals(mapPoint)) {
+					
+					queue.add(topPoint);
+				}
+			}
+			
+			// 아래
+			int[] botPoint = {x + 1, y};			
+			checkResult = checkPoint(botPoint);
+			if(checkResult) {
+				
+				int nx = botPoint[0];
+				int ny = botPoint[1];
+				
+				String mapPoint = inputArrays[nx][ny];
+				if("0".equals(mapPoint)) {
+					
+					queue.add(botPoint);
+				}
+			}
+			
+			// 왼쪽
+			int[] leftPoint = {x, y - 1};
+			checkResult = checkPoint(leftPoint);
+			if(checkResult) {
+				
+				int nx = leftPoint[0];
+				int ny = leftPoint[1];
+				
+				String mapPoint = inputArrays[nx][ny];
+				if("0".equals(mapPoint)) {
+					
+					queue.add(leftPoint);
+				}
+			}
+			
+			// 오른쪽
+			int[] rightPoint = {x, y + 1};			
+			checkResult = checkPoint(rightPoint);
+			if(checkResult) {
+				
+				int nx = rightPoint[0];
+				int ny = rightPoint[1];
+				
+				String mapPoint = inputArrays[nx][ny];
+				if("0".equals(mapPoint)) {
+					
+					queue.add(rightPoint);
+				}
+			}
+			
+			visited[x][y] = true;
+		}
+		
+
+		
+		
+//		// dfs : 앞으로 내가 체크해야 할 좌표가 들어감
+//		Stack<int[]> queue = new Stack<int[]>();
+//		
+//		queue.add(start);
+//		
+//		while(! queue.isEmpty()) {
+//			
+//			// 현재좌표 가져옴
+//			int[] point = queue.pop();
+//			
+//			int x = point[0];
+//			int y = point[1];
+//			
+//			if(x == ex && y == ey) {
+//				
+//				result = true;
+//				break;
+//			}
+//			
+//			if(visited[x][y]) {
+//				
+//				continue;
+//			}
+//			
+//			// 주변좌표
+//			// 확인하기전에, 주변 좌표가 맵 밖인지 체크(아웃바운스 방지)
+//			boolean checkResult = false;
+//			
+//			// 위
+//			int[] topPoint = {x - 1, y};
+//			checkResult = checkPoint(topPoint);
+//			if(checkResult) {
+//				
+//				int nx = topPoint[0];
+//				int ny = topPoint[1];
+//				
+//				String mapPoint = inputArrays[nx][ny];
+//				if("0".equals(mapPoint)) {
+//					
+//					queue.add(topPoint);
+//				}
+//			}
+//			
+//			// 아래
+//			int[] botPoint = {x + 1, y};			
+//			checkResult = checkPoint(botPoint);
+//			if(checkResult) {
+//				
+//				int nx = botPoint[0];
+//				int ny = botPoint[1];
+//				
+//				String mapPoint = inputArrays[nx][ny];
+//				if("0".equals(mapPoint)) {
+//					
+//					queue.add(botPoint);
+//				}
+//			}
+//			
+//			// 왼쪽
+//			int[] leftPoint = {x, y - 1};
+//			checkResult = checkPoint(leftPoint);
+//			if(checkResult) {
+//				
+//				int nx = leftPoint[0];
+//				int ny = leftPoint[1];
+//				
+//				String mapPoint = inputArrays[nx][ny];
+//				if("0".equals(mapPoint)) {
+//					
+//					queue.add(leftPoint);
+//				}
+//			}
+//			
+//			// 오른쪽
+//			int[] rightPoint = {x, y + 1};			
+//			checkResult = checkPoint(rightPoint);
+//			if(checkResult) {
+//				
+//				int nx = rightPoint[0];
+//				int ny = rightPoint[1];
+//				
+//				String mapPoint = inputArrays[nx][ny];
+//				if("0".equals(mapPoint)) {
+//					
+//					queue.add(rightPoint);
+//				}
+//			}
+//			
+//			visited[x][y] = true;
+//		}
+		
+		
+		
+		
+		System.out.println(result);
+	}
+
+	
+	/**
+	 * 
+	 * 좌표값이 맵 밖인지 확인하는 메서드
+	 * 
+	 * @param point 좌표값
+	 * @return result 체크 결과값
+	 */
+	private static boolean checkPoint(int[] point) {
+
+		int x = point[0];
+		int y = point[1];
+		
+		if(x < 0) {
+			
+			return false;
+		}
+		if(2 < x) {
+			
+			return false;
+		}
+		if(y < 0) {
+			
+			return false;
+		}
+		if(2 < y) {
+			
+			return false;
+		}
+		
+		return true;
+	}
+}
