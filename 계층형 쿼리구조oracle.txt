@@ -1,0 +1,45 @@
+□ 계층형 구조를 파악하는 오라클만의 쿼리방식
+
+	- 개념
+
+		노드(node) : 위 그림에서 원모양으로 표시된 항목을 노드라고 한다. 각각의 품목이 하나의 노드가 되며 실제 테이블에서는 하나의 로우에 대응
+
+		부모(parent) : 부모노드라고도 한다. 즉 트리구조에서 상위에 있는 노드를 말한다.
+
+		자식(child) : 자식노드라고도 한다. 위 그림에서 '모니터'는 컴퓨터의 자식노드이며, 컴퓨터는 모니터와 본체의 부모노드가 된다.
+
+		리프(leaf) : 리프노드라고도 한다. 더이상 하위에 연결된 노드가 없는 항목을 말한다. 즉 자식노드가 없는 노드라고 할수있으며 모니터, 프린터, 랜카드가 이에 해당된다.
+
+		루트(root) : 계층형, 트리구조에서 최상위에 있는 노드를 말한다. 컴퓨터가 이에 해당
+
+		레벨(level) : 트리구조에서의 각각의 계층을 말한다. 루트에 해당되는 '컴퓨터'가 1레벨이 되며, 순차적으로 그 하위에 있는 '모니터', '본체' 등이 2레벨이 된다.
+
+	- 예제
+
+		SELECT
+			*
+
+		FROM
+			table
+
+		START WITH
+			parent_id IS NULL 		-- 루트노드를 지정
+
+		CONNECT BY PRIOR
+			item_id = parent_id 	-- 부모와 자식노드들간의 관계를 연결
+
+	- HackerRank 문제풀이
+	
+		select
+			N
+			, CASE WHEN LEVEL = 1 THEN 'Root'
+				   WHEN CONNECT_BY_ISLEAF = 1 THEN 'Leaf'
+				   ELSE 'Inner' END NODE
+		from
+			BST
+		START WITH
+			P IS NULL
+		CONNECT BY PRIOR
+			N = P
+		ORDER BY
+			N
